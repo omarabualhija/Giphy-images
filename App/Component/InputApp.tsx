@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  View,
   TextInput,
   TextInputProps,
   Pressable,
@@ -12,8 +11,12 @@ import {
 } from 'react-native';
 import React, {forwardRef, useState} from 'react';
 import HeadingApp from './HeadingApp';
-import {COLORS, DEVICE, IMAGE} from '../Common';
-import Animated from 'react-native-reanimated';
+import {COLORS, DEVICE, IMAGE, THEME} from '../Common';
+import Animated, {
+  useAnimatedStyle,
+  useDerivedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 interface Iprops {
   style?: any;
@@ -36,7 +39,6 @@ interface Iprops {
   boxStyle?: ViewStyle;
   errorMessage?: string;
   rStyle?: ViewStyle;
-
   rightIcon?: boolean;
   iconStyle?: ImageStyle;
   source?: any;
@@ -50,6 +52,19 @@ const InputApp = forwardRef(function InputApp(
   let [isSecure, setisSecure] = useState<boolean>(
     props.password ? true : false,
   );
+  const [focuse, setFocuse] = useState<boolean>(!!props.value ? true : false);
+
+  const placePosition = useDerivedValue(() => {
+    return withTiming(focuse ? -20 : 0, {
+      duration: 300,
+    });
+  }, [focuse]);
+
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: placePosition.value}],
+    };
+  }, [placePosition]);
   return (
     <Animated.View
       style={[styles.container, props.containerStyle, props.rStyle]}>
@@ -70,6 +85,9 @@ const InputApp = forwardRef(function InputApp(
         <TextInput
           placeholderTextColor={COLORS.gray[500]}
           {...props}
+          placeholder=""
+          onFocus={() => setFocuse(true)}
+          onBlur={() => setFocuse(props.value ? true : false)}
           ref={ref}
           secureTextEntry={isSecure}
           value={props.value}
@@ -78,6 +96,11 @@ const InputApp = forwardRef(function InputApp(
           style={[styles.input, props.style]}
           editable={editableTxt}
         />
+        <Animated.View style={[styles.placeholderContainer, rStyle]}>
+          <HeadingApp normal_13 style={styles.labelTxt}>
+            {props.placeholder}
+          </HeadingApp>
+        </Animated.View>
         {props.rightIcon && (
           <Pressable style={styles.showPassBtn}>
             <Image style={props.iconStyle} source={props.source} />
@@ -105,14 +128,6 @@ const InputApp = forwardRef(function InputApp(
           />
         )}
       </Pressable>
-
-      {props.error && (
-        <View style={styles.errorBox}>
-          <HeadingApp normal_13 style={styles.errorTxt} numberOfLines={2}>
-            {props.errorMessage}
-          </HeadingApp>
-        </View>
-      )}
     </Animated.View>
   );
 });
@@ -121,7 +136,7 @@ export default InputApp;
 
 const styles = StyleSheet.create({
   container: {
-    width: DEVICE.width - 40,
+    width: DEVICE.width - THEME.SIZES.horizontal,
     alignSelf: 'center',
     gap: 5,
   },
@@ -137,6 +152,15 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingStart: 8,
   },
+  placeholderContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    paddingStart: 16,
+    paddingEnd: 16,
+    zIndex: -1,
+  },
   labelTxt: {fontSize: 10, color: COLORS.gray['500']},
   dummySpace: {flex: 0.5, alignItems: 'flex-end'},
   btnInput: {
@@ -146,7 +170,7 @@ const styles = StyleSheet.create({
     height: 55,
     gap: 8,
     backgroundColor: '#FFF',
-    borderRadius: 100,
+    borderRadius: THEME.SIZES.radius,
     padding: 16,
 
     borderWidth: 1,
@@ -174,13 +198,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 9999,
-  },
-  errorBox: {
-    paddingStart: 14,
-    justifyContent: 'flex-start',
-  },
-  errorTxt: {
-    color: COLORS.red[500],
-    textAlign: 'right',
   },
 });

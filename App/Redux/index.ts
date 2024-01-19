@@ -3,7 +3,6 @@ import userSlice from './slices/user/userSlice';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {persistStore, persistReducer} from 'redux-persist';
 import AppSlice from './slices/App/AppSlice';
-
 import {reduxStorage} from './AsyncStoreg';
 let RootStore = combineReducers({
   user: userSlice,

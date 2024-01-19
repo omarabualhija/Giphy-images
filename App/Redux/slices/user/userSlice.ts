@@ -1,19 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {
-  forgotPasswordURL,
-  loginURL,
-  confirmOtpURL,
-  signupURL,
-  updatePasswordURL,
-} from '../../URL';
+
 import {AXIOS} from '../../../API';
 
-const initialState: IState = {};
+const initialState: initStateType = {
+  user: undefined,
+};
 
 export let userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
+    loginUser: (state, action) => {
+      state.user = action.payload;
+    },
     logoutUser: state => {
       state.user = undefined;
     },
@@ -21,5 +20,4 @@ export let userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {logoutUser, setSelectedLocation, setWatchedBoarding} =
-  userSlice.actions;
+export const {loginUser, logoutUser} = userSlice.actions;

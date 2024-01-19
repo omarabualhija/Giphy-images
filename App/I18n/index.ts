@@ -46,6 +46,9 @@ type RecursiveKeyOfHandleValue<
   ? Text | `${Text}${RecursiveKeyOfInner<TValue>}`
   : Text;
 
-export function translate(key: string, options: Record<string, any> = {}) {
-  return i18n.t(key, options);
+export function translate(
+  key: string,
+  props?: Record<string, string | number>,
+) {
+  return i18n.t(key, props);
 }

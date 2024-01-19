@@ -1,4 +1,6 @@
-const AsyncStorageKey = {} as const;
+const AsyncStorageKey = {
+  Lang: '@Lang',
+} as const;
 const GOOGLE_API_KEY = '';
 export default {
   AsyncStorageKey,

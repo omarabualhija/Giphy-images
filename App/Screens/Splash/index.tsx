@@ -1,20 +1,24 @@
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
 
 import {RootStackScreenProps} from '../../Navigation/types';
-import {DEVICE} from '../../Common';
+import {COLORS, DEVICE} from '../../Common';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const SplashScreen: React.FC<RootStackScreenProps<'SplashScreen'>> = ({
   navigation,
 }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('SigninScreen');
+    }, 3000);
+  }, []);
+
   return (
-    <LinearGradient
-      colors={['#4c669f', '#3b5998', '#192f6a']}
-      style={styles.flex}>
+    <LinearGradient colors={COLORS.gradient} style={styles.flex}>
       <View style={styles.flex}>
         <View style={styles.logoContainer}>
-          {/* <Image source={IMAGE.Logos.transparentLogo} style={styles.logo} /> */}
+          <ActivityIndicator size="large" color="#fff" />
         </View>
       </View>
     </LinearGradient>

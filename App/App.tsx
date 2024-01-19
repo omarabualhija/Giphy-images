@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
 import React, {useState, useLayoutEffect, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import NetInfo from '@react-native-community/netinfo';
@@ -10,10 +10,9 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {useLanguage} from './util/useLanguage';
 import NavigationApp from './Navigation';
-import {COLORS, DEVICE} from './Common';
+import {DEVICE} from './Common';
 import './I18n';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
 import {ToastApp} from './Component';
 const App = () => {
   let [isConnected, setIsConnected] = useState<boolean>(true);
@@ -33,18 +32,16 @@ const App = () => {
   }, []);
 
   if (!isConnected) <></>;
-
   return (
     <GestureHandlerRootView style={styles.container}>
-      <StatusBar translucent backgroundColor={'transparent'} />
       <Provider store={rootStore}>
         <PersistGate persistor={persistor}>
           <SafeAreaProvider style={styles.container}>
             <BottomSheetModalProvider>
-              <View style={styles.container}>
+              <SafeAreaView style={[styles.container]}>
                 <NavigationApp />
                 <ToastApp />
-              </View>
+              </SafeAreaView>
             </BottomSheetModalProvider>
           </SafeAreaProvider>
         </PersistGate>

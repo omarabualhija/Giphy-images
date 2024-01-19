@@ -1,6 +1,5 @@
 import {StyleSheet, Text, TextStyle} from 'react-native';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 import {translate} from '../I18n';
 import {COLORS, DEVICE} from '../Common';
 
@@ -37,7 +36,6 @@ const HeadingApp = ({
   numberOfLines = 1,
   variables,
 }: Iprops) => {
-  let {t} = useTranslation();
   let $myStyle = strong_16
     ? styles.strong_16
     : strong_15
@@ -60,24 +58,13 @@ const HeadingApp = ({
     ? ({writingDirection: 'rtl'} satisfies TextStyle)
     : ({textAlign: 'left'} satisfies TextStyle);
 
-  const replaceVariables = (
-    text: string,
-    vars: Record<string, string | number> = {},
-  ) => {
-    let newText = text;
-    Object.keys(vars).forEach(key => {
-      newText = newText.replace(`{{${key}}}`, String(vars[key]));
-    });
-    return newText;
-  };
-
   return (
     <>
       <Text
         onLayout={onLayout}
         numberOfLines={numberOfLines}
         style={[styles.mainStyle, $myStyle, $RTLStyle, style]}>
-        {replaceVariables(translate(String(children)), variables)}
+        {translate(String(children ?? ''), variables)}
       </Text>
     </>
   );

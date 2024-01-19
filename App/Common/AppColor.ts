@@ -1,9 +1,11 @@
 const COLORS = {
-  primary: '#000',
+  primary: '#0c9',
+  secoundry: '#09f',
   border: '#E8ECF4',
   text: '#000',
   black: '#000',
   white: '#FFF',
+  gradient: ['#0c9', '#09f'],
 
   gray: {
     50: '#f9fafb',

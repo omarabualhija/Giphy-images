@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {COLORS, DEVICE} from '../Common';
+import {COLORS, DEVICE, THEME} from '../Common';
 import LinearGradient from 'react-native-linear-gradient';
 import HeadingApp from './HeadingApp';
 
@@ -37,14 +37,12 @@ const GradientBtnApp = ({
   color = COLORS.white,
 }: Iprops) => {
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      onPress={() => onPress()}
-      // style={[transparent ? styles.transparentStyle : styles.btn, style]}
-    >
+    <TouchableOpacity disabled={disabled} onPress={() => onPress()}>
       <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
         style={[styles.btn, style]}
-        colors={[COLORS.blue[400], COLORS.blue[500]]}>
+        colors={COLORS.gradient}>
         {loading ? (
           // TODO: add your custom loading
           <ActivityIndicator color={color} />
@@ -72,19 +70,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     alignSelf: 'center',
     height: 57,
-    width: DEVICE.width - 140,
-    borderRadius: 100,
-    overFlow: 'hidden',
+    width: DEVICE.width - THEME.SIZES.horizontal,
+    borderRadius: THEME.SIZES.radius,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#001459',
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 11.95,
-    elevation: 10,
   },
   txtBox: {flexDirection: 'row', gap: 12, alignItems: 'center'},
   txt: {

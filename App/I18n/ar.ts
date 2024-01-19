@@ -3,6 +3,8 @@ const ar = {
     prefex: 'ar',
     ID: 2,
     prefix: 'en',
+    Email: 'البريد الإلكتروني',
+    Password: 'كلمه السر',
   },
 };
 

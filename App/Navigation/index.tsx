@@ -1,10 +1,11 @@
 import React from 'react';
-import {DefaultTheme} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
 
 import {rootStore, useAppSelector} from '../Redux';
-import {SplashScreen} from '../Screens';
+import {SplashScreen, SigninScreen} from '../Screens';
+import {AppStack} from './AppStack';
 
 const App = createNativeStackNavigator<RootStackParamList>();
 const MyTheme = {
@@ -17,20 +18,26 @@ const MyTheme = {
 
 let RootNavigation = () => {
   const {user} = useAppSelector(state => state.user);
+  console.log('user', user);
   return (
-    <App.Navigator
-      initialRouteName={'SplashScreen'}
-      screenOptions={{
-        headerShown: false,
-      }}>
-      {!user ? (
-        <App.Group>
-          <App.Screen name="SplashScreen" component={SplashScreen} />
-        </App.Group>
-      ) : (
-        <></>
-      )}
-    </App.Navigator>
+    <NavigationContainer theme={MyTheme}>
+      <App.Navigator
+        initialRouteName={'SplashScreen'}
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {!user ? (
+          <App.Group>
+            <App.Screen name="SplashScreen" component={SplashScreen} />
+            <App.Screen name="SigninScreen" component={SigninScreen} />
+          </App.Group>
+        ) : (
+          <App.Group>
+            <App.Screen name="AppStack" component={AppStack} />
+          </App.Group>
+        )}
+      </App.Navigator>
+    </NavigationContainer>
   );
 };
 

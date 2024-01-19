@@ -7,11 +7,11 @@ import CutterApp from './CutterApp';
 import BtnIconApp from './BtnIconApp';
 import GradientBtnApp from './GradientBtnApp';
 import HeaderApp from './HeaderApp';
-import RadioApp from './RadioApp';
 import ToastApp, {Toast} from './ToastApp';
 import AccordionApp from './AccordionApp';
 import LoadingApp from './LoadingApp';
 import CheckboxApp from './CheckboxApp';
+import CardApp from './Card';
 export {
   InputApp,
   BtnApp,
@@ -22,10 +22,10 @@ export {
   BtnIconApp,
   GradientBtnApp,
   HeaderApp,
-  RadioApp,
   ToastApp,
   Toast,
   AccordionApp,
   LoadingApp,
   CheckboxApp,
+  CardApp,
 };
