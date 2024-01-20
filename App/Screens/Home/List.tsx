@@ -1,12 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
-import Animated from 'react-native-reanimated';
+import {SharedTransition, withSpring} from 'react-native-reanimated';
 import {CardApp, LoadingApp} from '../../Component';
 import {useAppDispatch, useAppSelector} from '../../Redux';
 import {getHomeDataAction} from '../../Redux/slices/App/AppSlice';
 import {GIPHY_TOKEN} from '@env';
 import {THEME} from '../../Common';
 import {useNavigation} from '@react-navigation/native';
+import ErrorApp from '../../Component/ErrorApp';
 const List = () => {
   const {
     nextOffset,
@@ -35,8 +36,10 @@ const List = () => {
 
   if (loadingHomeData) return <LoadingApp />;
 
+  if (errorHomeData) return <ErrorApp />;
+
   return (
-    <Animated.FlatList
+    <FlatList
       style={{flex: 1}}
       removeClippedSubviews={true}
       progressViewOffset={100}

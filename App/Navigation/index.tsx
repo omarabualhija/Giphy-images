@@ -33,7 +33,13 @@ let RootNavigation = () => {
         ) : (
           <App.Group>
             <App.Screen name="AppStack" component={AppStack} />
-            <App.Screen name="DetailsScreen" component={DetailsScreen} />
+            <App.Screen
+              options={{
+                animation: 'slide_from_right',
+              }}
+              name="DetailsScreen"
+              component={DetailsScreen}
+            />
           </App.Group>
         )}
       </App.Navigator>

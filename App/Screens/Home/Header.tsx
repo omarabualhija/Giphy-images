@@ -7,14 +7,10 @@ import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 const Header = () => {
   const navigation = useNavigation();
 
-  const rHeaderStyle = useAnimatedStyle(() => {
-    return {};
-  });
-
   return (
-    <Animated.View style={rHeaderStyle}>
+    <View style={{}}>
       <HeaderApp navigation={navigation} RightComponent />
-    </Animated.View>
+    </View>
   );
 };
 

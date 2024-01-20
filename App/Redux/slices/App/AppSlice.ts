@@ -19,7 +19,9 @@ export const getHomeDataAction = createAsyncThunk<
 >('App/Home', async (params, thunk) => {
   const {rejectWithValue} = thunk;
   try {
+    console.log('Ssss');
     const {data} = await AXIOS().get(getHomeDataURL + '?' + joinObject(params));
+    console.log('data home action', data);
     return data;
   } catch (err: any) {
     console.log(JSON.stringify(err.message));

@@ -30,12 +30,13 @@ export const SigninScreen: React.FC<
       <Logo />
       <InputApp
         placeholder="Email"
-        error={true}
+        error={error && !email}
         onChangeText={setEmail}
         value={email}
       />
       <InputApp
         placeholder="Password"
+        error={error && !password}
         password
         onChangeText={setPassword}
         value={password}

@@ -1,8 +1,9 @@
-import {Image, Linking, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {COLORS, DEVICE, IMAGE, THEME} from '../../Common';
 import {BtnIconApp, FavoriteApp, HeadingApp} from '../../Component';
 import {openLink} from '../../util';
+import Animated from 'react-native-reanimated';
 
 type PropsType = {
   data: imgObjType;
@@ -14,7 +15,11 @@ const MainDetails = ({data}: PropsType) => {
   return (
     <View style={styles.container}>
       <View>
-        <Image source={{uri: data.images.original.url}} style={styles.img} />
+        <Animated.Image
+          sharedTransitionTag={`image-${data.title}`}
+          source={{uri: data.images.original.url}}
+          style={styles.img}
+        />
       </View>
       {/* name & fav */}
       <View style={styles.firstRow}>

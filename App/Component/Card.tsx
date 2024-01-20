@@ -18,8 +18,6 @@ type propsType = {
 };
 
 const Card: FC<propsType> = ({item, index, onPress}) => {
-  const dispatch = useAppDispatch();
-
   return (
     <Pressable style={[styles.container]} onPress={onPress}>
       <View style={styles.userInfoBox}>
@@ -29,7 +27,8 @@ const Card: FC<propsType> = ({item, index, onPress}) => {
           <HeadingApp normal_13>{item.user?.display_name}</HeadingApp>
         </View>
       </View>
-      <Image
+      <Animated.Image
+        sharedTransitionTag={`image-${item.title}`}
         defaultSource={IMAGE.icons.userplaceholder}
         source={{uri: `${item.images.original.url}.gif`}}
         style={[styles.image]}

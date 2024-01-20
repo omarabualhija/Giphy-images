@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import {CardApp, LoadingApp} from '../../Component';
+import {useNavigation} from '@react-navigation/native';
 
 type propsType = {
   data: imgObjType[];
@@ -11,6 +12,7 @@ type propsType = {
 };
 
 const List = ({data, loading, loadingMore, onEndReached}: propsType) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {loading ? (
@@ -23,7 +25,12 @@ const List = ({data, loading, loadingMore, onEndReached}: propsType) => {
           keyExtractor={(_, index) => index.toString()}
           data={data}
           renderItem={props => {
-            return <CardApp {...props} />;
+            return (
+              <CardApp
+                {...props}
+                onPress={() => navigation.navigate('DetailsScreen', props.item)}
+              />
+            );
           }}
           ListFooterComponent={() => {
             return loadingMore ? <LoadingApp /> : null;

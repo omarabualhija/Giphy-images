@@ -1,19 +1,7 @@
-import {Alert, Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {FC} from 'react';
 import {RootStackScreenProps} from '../../Navigation/types';
-import {DEVICE, IMAGE, THEME} from '../../Common';
-import {
-  BtnApp,
-  BtnIconApp,
-  FavoriteApp,
-  HeaderApp,
-  HeadingApp,
-} from '../../Component';
-import {useAppDispatch, useAppSelector} from '../../Redux';
-import {
-  deleteAllFavoriteAction,
-  toggleFavorite,
-} from '../../Redux/slices/Favorite/favoriteSlice';
+import {HeaderApp} from '../../Component';
 import MainDetails from './MainDetails';
 import Tabs from './Tabs';
 

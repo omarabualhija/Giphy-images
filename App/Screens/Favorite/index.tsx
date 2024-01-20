@@ -41,6 +41,7 @@ export const FavoriteScreen: FC<HomeStackScreenProps<'FavoriteScreen'>> = ({
         title={`My Favorite . (${favoriteData.length})`}
       />
       <FlatList
+        contentContainerStyle={{flexGrow: 1, paddingBottom: 100}}
         keyExtractor={(_, index) => index.toString()}
         data={favoriteData}
         renderItem={props => {

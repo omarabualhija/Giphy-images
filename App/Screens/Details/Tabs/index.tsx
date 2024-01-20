@@ -55,7 +55,7 @@ const Tabs = ({data}: {data: imgObjType}) => {
 
       {activeTab === 0 && (
         <Animated.View style={styles.nameBox} entering={FadeInLeft}>
-          <HeadingApp>{`Nmame : ${data.user.display_name}`}</HeadingApp>
+          <HeadingApp>{`Nmame : ${data.user?.display_name}`}</HeadingApp>
         </Animated.View>
       )}
       {activeTab === 1 && (

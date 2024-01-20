@@ -5,7 +5,7 @@ import Device from '../Common/Device';
 import HeadingApp from './HeadingApp';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BtnIconApp} from '.';
-import {SIZES} from '../Common/AppTheme';
+import {useAppSelector} from '../Redux';
 
 type Iprops = {
   title?: string;
@@ -21,11 +21,10 @@ const HeaderApp = ({
   navigation,
 }: Iprops) => {
   const {top} = useSafeAreaInsets();
-
+  const {favoriteData} = useAppSelector(state => state.favorite);
   return (
-    <View
-      style={[styles.header, {paddingTop: top + THEME.SIZES.subHorizontal}]}>
-      <View style={styles.leftBoxStyle}>
+    <View style={[styles.header]}>
+      <View>
         {hasBack ? (
           <Pressable onPress={() => navigation.goBack()}>
             <Image source={IMAGE.icons.arrowBack} style={styles.icon} />
@@ -43,12 +42,19 @@ const HeaderApp = ({
         </View>
       )}
       {RightComponent && (
-        <BtnIconApp
-          onPress={() => navigation.navigate('FavoriteScreen')}
-          source={IMAGE.icons.heart}
-          width={23}
-          height={23}
-        />
+        <View>
+          <View style={styles.favCountBox}>
+            <HeadingApp style={styles.favCount}>
+              {favoriteData.length}
+            </HeadingApp>
+          </View>
+          <BtnIconApp
+            onPress={() => navigation.navigate('FavoriteScreen')}
+            source={IMAGE.icons.heart}
+            width={23}
+            height={23}
+          />
+        </View>
       )}
     </View>
   );
@@ -65,6 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: THEME.SIZES.subHorizontal,
+    borderBottomColor: COLORS.gray[300],
+    borderBottomWidth: 1,
   },
 
   logo: {
@@ -78,7 +86,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     tintColor: COLORS.black,
   },
-  leftBoxStyle: {},
   titleContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -87,5 +94,19 @@ const styles = StyleSheet.create({
   title: {
     //: THEME.SIZES.subHorizontal,
     color: COLORS.primary,
+  },
+  favCountBox: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: COLORS.primary,
+    position: 'absolute',
+    top: -10,
+    right: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  favCount: {
+    color: COLORS.white,
   },
 });
