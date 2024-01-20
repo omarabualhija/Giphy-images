@@ -14,6 +14,8 @@ const Images = {
     home: require('../assets/icons/home.png'),
     search: require('../assets/icons/search.png'),
     trash: require('../assets/icons/trash.png'),
+    website: require('../assets/icons/website.png'),
+    star: require('../assets/icons/star.png'),
   },
   lottie: {},
 };

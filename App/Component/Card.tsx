@@ -7,7 +7,7 @@ import Animated, {
   Keyframe,
 } from 'react-native-reanimated';
 import {COLORS, DEVICE, IMAGE, THEME} from '../Common';
-import {HeadingApp} from '.';
+import {BtnIconApp, FavoriteApp, HeadingApp} from '.';
 import {toggleFavorite} from '../Redux/slices/Favorite/favoriteSlice';
 import {useAppDispatch, useAppSelector} from '../Redux';
 
@@ -19,9 +19,7 @@ type propsType = {
 
 const Card: FC<propsType> = ({item, index, onPress}) => {
   const dispatch = useAppDispatch();
-  const isFav = useAppSelector(state =>
-    state.favorite.favoriteData.some(fav => fav.id === item.id),
-  );
+
   return (
     <Pressable style={[styles.container]} onPress={onPress}>
       <View style={styles.userInfoBox}>
@@ -40,19 +38,8 @@ const Card: FC<propsType> = ({item, index, onPress}) => {
         <HeadingApp numberOfLines={3} strong_16 style={styles.descriptionTxt}>
           {item.title}
         </HeadingApp>
-        <Pressable
-          hitSlop={{top: 15, left: 15, right: 15, bottom: 15}}
-          onPress={() => dispatch(toggleFavorite(item))}>
-          <Image
-            source={IMAGE.icons.heart}
-            style={[
-              styles.heartIcon,
-              {
-                tintColor: isFav ? COLORS.primary : COLORS.black,
-              },
-            ]}
-          />
-        </Pressable>
+
+        <FavoriteApp item={item} />
       </View>
     </Pressable>
   );
@@ -104,5 +91,5 @@ const styles = StyleSheet.create({
     flex: 1,
     // marginRight:THEME.SIZES.subHorizontal,
   },
-  heartIcon: {width: 30, height: 30, resizeMode: 'contain'},
+  heartIcon: {width: 30, height: 30},
 });

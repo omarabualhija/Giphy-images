@@ -12,6 +12,7 @@ import AccordionApp from './AccordionApp';
 import LoadingApp from './LoadingApp';
 import CheckboxApp from './CheckboxApp';
 import CardApp from './Card';
+import FavoriteApp from './FavoriteApp';
 export {
   InputApp,
   BtnApp,
@@ -28,4 +29,5 @@ export {
   LoadingApp,
   CheckboxApp,
   CardApp,
+  FavoriteApp,
 };

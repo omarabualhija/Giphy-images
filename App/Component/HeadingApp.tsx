@@ -18,6 +18,7 @@ interface Iprops {
   style?: TextStyle;
   numberOfLines?: number;
   variables?: Record<string, string | number>;
+  onPress?: () => void;
 }
 
 const HeadingApp = ({
@@ -34,6 +35,7 @@ const HeadingApp = ({
   normal_13,
   style,
   numberOfLines = 1,
+  onPress,
   variables,
 }: Iprops) => {
   let $myStyle = strong_16
@@ -61,6 +63,7 @@ const HeadingApp = ({
   return (
     <>
       <Text
+        // onPress={onPress ? onPress : () => {}}
         onLayout={onLayout}
         numberOfLines={numberOfLines}
         style={[styles.mainStyle, $myStyle, $RTLStyle, style]}>
