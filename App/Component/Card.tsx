@@ -22,8 +22,8 @@ const Card: FC<propsType> = ({item, index, onPress}) => {
     <Pressable style={[styles.container]} onPress={onPress}>
       <View style={styles.userInfoBox}>
         <Image source={{uri: item.user?.avatar_url}} style={styles.avaterImg} />
-        <View>
-          <HeadingApp strong_15>{item.user?.username}</HeadingApp>
+        <View style={{gap: 5}}>
+          <HeadingApp strong_16>{item.user?.username}</HeadingApp>
           <HeadingApp normal_13>{item.user?.display_name}</HeadingApp>
         </View>
       </View>
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: DEVICE.width - THEME.SIZES.subHorizontal,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    backgroundColor: COLORS.red['100'],
   },
   description: {
     paddingHorizontal: THEME.SIZES.subHorizontal,

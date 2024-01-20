@@ -74,56 +74,55 @@ const HeadingApp = ({
 };
 
 export default HeadingApp;
-let fontName = DEVICE.isRTL ? 'Tajawal' : 'Poppins';
-
+const COLOR = COLORS.gray['900'];
 const styles = StyleSheet.create({
   mainStyle: {
     flexWrap: 'wrap',
   },
   strong_16: {
-    fontFamily: `Poppins-SemiBold`,
-    color: COLORS.gray['900'],
+    fontFamily: `Tajawal-Bold`,
+    color: COLOR,
     fontSize: 16,
   },
   strong_15: {
-    fontFamily: `${fontName}-SemiBold`,
-    color: COLORS.gray['900'],
+    fontFamily: `Tajawal-Bold`,
+    color: COLOR,
     fontSize: 15,
     fontWeight: '500',
   },
   strong_14: {
-    fontFamily: `${fontName}-SemiBold`,
-    color: COLORS.gray['900'],
+    fontFamily: `Tajawal-Bold`,
+    color: COLOR,
     fontSize: 14,
   },
   strong_12: {
-    fontFamily: `${fontName}-SemiBold`,
-    color: COLORS.gray['900'],
+    fontFamily: `Tajawal-Bold`,
+    color: COLOR,
     fontSize: 12,
   },
   mid_16: {
-    fontFamily: `${fontName}-Medium`,
-    color: COLORS.gray['900'],
+    fontFamily: 'Tajawal-Regular',
+    color: COLOR,
     fontSize: 16,
   },
   normal_18: {
-    fontFamily: `${fontName}-Regular`,
-    color: COLORS.gray['900'],
+    fontFamily: 'Tajawal-Regular',
+    color: COLOR,
     fontSize: 18,
   },
   normal_15: {
-    fontFamily: `${fontName}-Regular`,
-    color: COLORS.gray['900'],
+    fontFamily: 'Tajawal-Regular',
+    color: COLOR,
     fontSize: 15,
   },
   normal_14: {
-    fontFamily: `${fontName}-Regular`,
-    color: COLORS.gray['900'],
+    fontFamily: 'Tajawal-Regular',
+    color: COLOR,
     fontSize: 14,
   },
   normal_13: {
-    fontFamily: `${fontName}-Regular`,
-    color: COLORS.gray['900'],
+    fontFamily: 'Tajawal-Regular',
+    color: COLOR,
     fontSize: 13,
   },
 });
