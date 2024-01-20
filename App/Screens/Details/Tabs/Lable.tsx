@@ -15,7 +15,6 @@ const Lable = ({item, onPressLable}: {item: string; onPressLable: any}) => {
     runOnUI(() => {
       'worklet';
       const measured = measure(animatedRef);
-      console.log(measured);
       runOnJS(onPressLable)(measured);
     })();
   };

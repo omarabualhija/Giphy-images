@@ -6,10 +6,6 @@ export const AXIOS = (isForm = false) => {
     instance.defaults.headers['Content-Type'] = 'multipart/form-data';
   }
 
-  instance.interceptors.request.use(async congig => {
-    console.log('interceptors', JSON.stringify(congig));
-    return congig;
-  });
   //TODO:you can handle any thing here like token or any thing
   //you can add interceptors here but make sure to delete the interceptors after you finish
   //add by omar abu alhija

@@ -7,7 +7,6 @@ interface ValidationError {
 
 export const handleError = (error: any) => {
   if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
-    console.log('inside error', error);
     // return error.data.message;
     // Do something with this error...
   } else {
