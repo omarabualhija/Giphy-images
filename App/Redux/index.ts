@@ -4,9 +4,11 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {persistStore, persistReducer} from 'redux-persist';
 import AppSlice from './slices/App/AppSlice';
 import {reduxStorage} from './AsyncStoreg';
+import favoriteSlice from './slices/Favorite/favoriteSlice';
 let RootStore = combineReducers({
   user: userSlice,
   App: AppSlice,
+  favorite: favoriteSlice,
 });
 
 const persistConfig = {
@@ -14,7 +16,7 @@ const persistConfig = {
   version: 1,
   storage: reduxStorage,
   blacklist: ['App'],
-  whitelist: ['user'],
+  whitelist: ['user', 'favorite'],
 };
 const persistedReducer = persistReducer(persistConfig, RootStore);
 

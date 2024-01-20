@@ -1,0 +1,3 @@
+type initFavoriteSlice = {
+  favoriteData: imgObjType[];
+};

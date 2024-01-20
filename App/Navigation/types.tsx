@@ -13,6 +13,7 @@ export type RootStackParamList = {
 
 export type AppStackProps = {
   HomeStack: NavigatorScreenParams<HomeStackProps>;
+  searchScreen: undefined;
 };
 
 export type HomeStackProps = {

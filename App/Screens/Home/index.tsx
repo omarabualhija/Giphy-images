@@ -1,13 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {FC} from 'react';
-import {
-  AppStackScreenProps,
-  HomeStackScreenProps,
-} from '../../Navigation/types';
-import {HeaderApp} from '../../Component';
+import {StyleSheet, View} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {HomeStackScreenProps} from '../../Navigation/types';
 import Header from './Header';
 import List from './List';
-
 export const HomeScreen: FC<HomeStackScreenProps<'HomeScreen'>> = ({
   navigation,
 }) => {

@@ -18,7 +18,6 @@ const MyTheme = {
 
 let RootNavigation = () => {
   const {user} = useAppSelector(state => state.user);
-  console.log('user', user);
   return (
     <NavigationContainer theme={MyTheme}>
       <App.Navigator

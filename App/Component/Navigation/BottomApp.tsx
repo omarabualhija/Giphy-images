@@ -10,18 +10,12 @@ const BottomApp: React.FC<any> = ({state, descriptors, navigation, user}) => {
     {
       id: 1,
       name: 'Home',
-      color: COLORS.gray,
+      icon: IMAGE.icons.home,
     },
     {
       id: 2,
       name: 'search',
-
-      color: COLORS.gray,
-    },
-    {
-      id: 3,
-      name: 'favourite',
-      color: COLORS.gray,
+      icon: IMAGE.icons.search,
     },
   ];
 
@@ -29,10 +23,16 @@ const BottomApp: React.FC<any> = ({state, descriptors, navigation, user}) => {
     <View
       style={[
         styles.container,
-        {height: 60 + bottom, paddingVertical: bottom},
+        {
+          height: 65 + bottom,
+          paddingVertical: bottom,
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        },
       ]}>
-      {arr.map((_: any, index: number) => {
+      {arr.map((item, index: number) => {
         let route = state.routes[index];
+        console.log(route);
         const isFocused = state.index === index;
         const onPress = (index: number) => {
           var event = navigation.emit({
@@ -42,9 +42,8 @@ const BottomApp: React.FC<any> = ({state, descriptors, navigation, user}) => {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            const _params = index == 1 ? {id: '', type: ''} : {};
             // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({name: route.name, merge: true}, _params);
+            navigation.navigate({name: route.name, merge: true});
           }
         };
 
@@ -55,12 +54,8 @@ const BottomApp: React.FC<any> = ({state, descriptors, navigation, user}) => {
             key={arr[index].id}
             style={styles.btnBox}>
             {/* TODO: just import your image from the IMAGE folder */}
-            {/* <Image
-              source={
-              }
-              style={styles.img}
-            /> */}
-            <HeadingApp style={styles.txt}>{arr[index].name}</HeadingApp>
+            <Image source={item.icon} style={styles.img} />
+            <HeadingApp style={styles.txt}>{item.name}</HeadingApp>
           </TouchableOpacity>
         );
       })}

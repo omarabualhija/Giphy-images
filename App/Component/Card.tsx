@@ -1,19 +1,102 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {FC} from 'react';
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInUp,
+  Keyframe,
+} from 'react-native-reanimated';
+import {COLORS, DEVICE, IMAGE, THEME} from '../Common';
+import {HeadingApp} from '.';
+import {toggleFavorite} from '../Redux/slices/Favorite/favoriteSlice';
+import {useAppDispatch, useAppSelector} from '../Redux';
 
 type propsType = {
-  item: any;
+  item: imgObjType;
   index: number;
 };
 
 const Card: FC<propsType> = ({item, index}) => {
+  const dispatch = useAppDispatch();
+  const isFav = useAppSelector(state =>
+    state.favorite.favoriteData.some(fav => fav.id === item.id),
+  );
   return (
-    <View>
-      <Text>Card</Text>
-    </View>
+    <Pressable style={[styles.container]}>
+      <View style={styles.userInfoBox}>
+        <Image source={{uri: item.user?.avatar_url}} style={styles.avaterImg} />
+        <View>
+          <HeadingApp strong_15>{item.user?.username}</HeadingApp>
+          <HeadingApp normal_13>{item.user?.display_name}</HeadingApp>
+        </View>
+      </View>
+      <Image
+        defaultSource={IMAGE.icons.userplaceholder}
+        source={{uri: `${item.images.original.url}.gif`}}
+        style={[styles.image]}
+      />
+      <View style={styles.description}>
+        <HeadingApp numberOfLines={3} strong_16 style={styles.descriptionTxt}>
+          {item.title}
+        </HeadingApp>
+        <Pressable onPress={() => dispatch(toggleFavorite(item))}>
+          <Image
+            source={IMAGE.icons.heart}
+            style={[
+              styles.heartIcon,
+              {
+                tintColor: isFav ? COLORS.red[500] : COLORS.black,
+              },
+            ]}
+          />
+        </Pressable>
+      </View>
+    </Pressable>
   );
 };
 
 export default Card;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width: DEVICE.width - THEME.SIZES.subHorizontal,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
+    overflow: 'hidden',
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    elevation: 5,
+  },
+  userInfoBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: THEME.SIZES.subHorizontal,
+  },
+  avaterImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    resizeMode: 'contain',
+  },
+  image: {
+    width: '100%',
+    height: DEVICE.width - THEME.SIZES.subHorizontal,
+    resizeMode: 'contain',
+  },
+  description: {
+    padding: THEME.SIZES.subHorizontal,
+    flexDirection: 'row',
+    flex: 1,
+    gap: THEME.SIZES.subHorizontal,
+  },
+  descriptionTxt: {
+    flex: 1,
+    // marginRight:THEME.SIZES.subHorizontal,
+  },
+  heartIcon: {width: 30, height: 30, resizeMode: 'contain'},
+});

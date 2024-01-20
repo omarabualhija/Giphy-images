@@ -10,6 +10,9 @@ const Images = {
     viewEye: require('../assets/icons/viewEye.png'),
     arrowBack: require('../assets/icons/arrowBack.png'),
     heart: require('../assets/icons/heart.png'),
+    userplaceholder: require('../assets/icons/userplaceholder.png'),
+    home: require('../assets/icons/home.png'),
+    search: require('../assets/icons/search.png'),
   },
   lottie: {},
 };
