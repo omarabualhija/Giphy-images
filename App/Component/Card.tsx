@@ -1,5 +1,5 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import Animated, {
   FadeIn,
   FadeInDown,
@@ -44,7 +44,7 @@ const Card: FC<propsType> = ({item, index, onPress}) => {
   );
 };
 
-export default Card;
+export default memo(Card);
 
 const styles = StyleSheet.create({
   container: {
