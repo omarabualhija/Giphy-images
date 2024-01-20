@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {AXIOS} from '../../../API/instance';
-import {getHomeDataURL} from '../../URL';
+import {getHomeDataURL, searchURL} from '../../URL';
 import joinObject from '../../../util/joinObject';
 
 let initialState: initialAppSliceState = {
@@ -26,6 +26,21 @@ export const getHomeDataAction = createAsyncThunk<
     return rejectWithValue(err);
   }
 });
+
+export const searchAction = createAsyncThunk<searchResponse, searchParams>(
+  'App/Home',
+  async (params, thunk) => {
+    const {rejectWithValue} = thunk;
+    try {
+      const {data} = await AXIOS().get(searchURL + '?' + joinObject(params));
+      console.log('data search action', data);
+      return data;
+    } catch (err: any) {
+      console.log(JSON.stringify(err.message));
+      return rejectWithValue(err);
+    }
+  },
+);
 
 export let AppSlice = createSlice({
   name: 'AppSlice',

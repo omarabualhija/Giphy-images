@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
 
 import {rootStore, useAppSelector} from '../Redux';
-import {SplashScreen, SigninScreen} from '../Screens';
+import {SplashScreen, SigninScreen, DetailsScreen} from '../Screens';
 import {AppStack} from './AppStack';
 
 const App = createNativeStackNavigator<RootStackParamList>();
@@ -33,6 +33,7 @@ let RootNavigation = () => {
         ) : (
           <App.Group>
             <App.Screen name="AppStack" component={AppStack} />
+            <App.Screen name="DetailsScreen" component={DetailsScreen} />
           </App.Group>
         )}
       </App.Navigator>

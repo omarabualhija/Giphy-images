@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {HeadingApp} from '.';
-import {COLORS, DEVICE} from '../Common';
+import {COLORS, DEVICE, THEME} from '../Common';
 
 type Iprops = {
   txt: string;
@@ -58,12 +58,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     alignSelf: 'center',
     height: 57,
-    width: DEVICE.width - 140,
-    borderRadius: 100,
-    overFlow: 'hidden',
+    width: DEVICE.width - THEME.SIZES.subHorizontal,
+    borderRadius: THEME.SIZES.radius,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#001459',
     shadowOffset: {
       width: 0,
       height: 10,
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
   },
   txtBox: {flexDirection: 'row', gap: 12, alignItems: 'center'},
   txt: {
-    color: COLORS.blue[400],
+    color: COLORS.primary,
   },
   transparentStyle: {
     padding: 5,

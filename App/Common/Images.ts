@@ -13,6 +13,7 @@ const Images = {
     userplaceholder: require('../assets/icons/userplaceholder.png'),
     home: require('../assets/icons/home.png'),
     search: require('../assets/icons/search.png'),
+    trash: require('../assets/icons/trash.png'),
   },
   lottie: {},
 };

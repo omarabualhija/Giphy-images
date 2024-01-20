@@ -15,8 +15,11 @@ export let favoriteSlice = createSlice({
       if (index === -1) state.favoriteData.push(action.payload);
       else state.favoriteData.splice(index, 1);
     },
+    deleteAllFavoriteAction: state => {
+      state.favoriteData = [];
+    },
   },
 });
 
 export default favoriteSlice.reducer;
-export const {toggleFavorite} = favoriteSlice.actions;
+export const {toggleFavorite, deleteAllFavoriteAction} = favoriteSlice.actions;

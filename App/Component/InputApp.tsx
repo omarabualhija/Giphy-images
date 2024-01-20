@@ -39,7 +39,6 @@ interface Iprops {
   boxStyle?: ViewStyle;
   errorMessage?: string;
   rStyle?: ViewStyle;
-  rightIcon?: boolean;
   iconStyle?: ImageStyle;
   source?: any;
 }
@@ -48,7 +47,12 @@ const InputApp = forwardRef(function InputApp(
   props: Iprops & TextInputProps,
   ref: any,
 ) {
-  let {onPress = () => '', editable: editableTxt = true, boxStyle} = props;
+  let {
+    onPress = () => '',
+    editable: editableTxt = true,
+    boxStyle,
+    RightComponent,
+  } = props;
   let [isSecure, setisSecure] = useState<boolean>(
     props.password ? true : false,
   );
@@ -101,11 +105,7 @@ const InputApp = forwardRef(function InputApp(
             {props.placeholder}
           </HeadingApp>
         </Animated.View>
-        {props.rightIcon && (
-          <Pressable style={styles.showPassBtn}>
-            <Image style={props.iconStyle} source={props.source} />
-          </Pressable>
-        )}
+        {RightComponent && <RightComponent />}
         {props.password && (
           <Pressable
             style={styles.showPassBtn}

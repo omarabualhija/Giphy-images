@@ -5,6 +5,7 @@ import Device from '../Common/Device';
 import HeadingApp from './HeadingApp';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BtnIconApp} from '.';
+import {SIZES} from '../Common/AppTheme';
 
 type Iprops = {
   title?: string;
@@ -24,7 +25,7 @@ const HeaderApp = ({
   return (
     <View
       style={[styles.header, {paddingTop: top + THEME.SIZES.subHorizontal}]}>
-      <View style={{}}>
+      <View style={styles.leftBoxStyle}>
         {hasBack ? (
           <Pressable onPress={() => navigation.goBack()}>
             <Image source={IMAGE.icons.arrowBack} style={styles.icon} />
@@ -35,9 +36,11 @@ const HeaderApp = ({
       </View>
 
       {title && (
-        <HeadingApp strong_16 style={styles.title}>
-          {title}
-        </HeadingApp>
+        <View style={styles.titleContainer}>
+          <HeadingApp strong_16 style={styles.title}>
+            {title}
+          </HeadingApp>
+        </View>
       )}
       {RightComponent && (
         <BtnIconApp
@@ -56,10 +59,12 @@ export default HeaderApp;
 const styles = StyleSheet.create({
   header: {
     width: Device.width,
+    height: 70,
     paddingHorizontal: THEME.SIZES.subHorizontal,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: THEME.SIZES.subHorizontal,
   },
 
   logo: {
@@ -73,7 +78,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     tintColor: COLORS.black,
   },
+  leftBoxStyle: {},
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
   title: {
-    color: COLORS.white,
+    //: THEME.SIZES.subHorizontal,
+    color: COLORS.primary,
   },
 });

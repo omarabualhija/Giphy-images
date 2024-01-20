@@ -9,6 +9,7 @@ export type RootStackParamList = {
   SplashScreen: undefined;
   SigninScreen: undefined;
   AppStack: NavigatorScreenParams<AppStackProps>;
+  DetailsScreen: imgObjType;
 };
 
 export type AppStackProps = {

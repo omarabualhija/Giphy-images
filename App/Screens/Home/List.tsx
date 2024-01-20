@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from '../../Redux';
 import {getHomeDataAction} from '../../Redux/slices/App/AppSlice';
 import {GIPHY_TOKEN} from '@env';
 import {THEME} from '../../Common';
+import {useNavigation} from '@react-navigation/native';
 const List = () => {
   const {
     nextOffset,
@@ -17,6 +18,7 @@ const List = () => {
     loadingMoreHomeData,
   } = useAppSelector(state => state.App);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
   useEffect(() => {
     var propmise = dispatch(
       getHomeDataAction({
@@ -36,13 +38,25 @@ const List = () => {
   return (
     <Animated.FlatList
       style={{flex: 1}}
+      removeClippedSubviews={true}
+      progressViewOffset={100}
+      onEndReachedThreshold={0.5}
       contentContainerStyle={styles.contantContainerStyle}
       keyExtractor={(_, index) => index.toString()}
       data={homeData}
       ListFooterComponent={() => {
         return loadingMoreHomeData && <LoadingApp />;
       }}
-      renderItem={props => <CardApp {...props} />}
+      renderItem={props => (
+        <CardApp
+          {...props}
+          onPress={() =>
+            navigation.navigate('DetailsScreen', {
+              ...props.item,
+            })
+          }
+        />
+      )}
       onEndReached={() => {
         if (nextOffset < total_count) {
           dispatch(

@@ -14,15 +14,16 @@ import {useAppDispatch, useAppSelector} from '../Redux';
 type propsType = {
   item: imgObjType;
   index: number;
+  onPress: () => void;
 };
 
-const Card: FC<propsType> = ({item, index}) => {
+const Card: FC<propsType> = ({item, index, onPress}) => {
   const dispatch = useAppDispatch();
   const isFav = useAppSelector(state =>
     state.favorite.favoriteData.some(fav => fav.id === item.id),
   );
   return (
-    <Pressable style={[styles.container]}>
+    <Pressable style={[styles.container]} onPress={onPress}>
       <View style={styles.userInfoBox}>
         <Image source={{uri: item.user?.avatar_url}} style={styles.avaterImg} />
         <View>
@@ -39,13 +40,15 @@ const Card: FC<propsType> = ({item, index}) => {
         <HeadingApp numberOfLines={3} strong_16 style={styles.descriptionTxt}>
           {item.title}
         </HeadingApp>
-        <Pressable onPress={() => dispatch(toggleFavorite(item))}>
+        <Pressable
+          hitSlop={{top: 15, left: 15, right: 15, bottom: 15}}
+          onPress={() => dispatch(toggleFavorite(item))}>
           <Image
             source={IMAGE.icons.heart}
             style={[
               styles.heartIcon,
               {
-                tintColor: isFav ? COLORS.red[500] : COLORS.black,
+                tintColor: isFav ? COLORS.primary : COLORS.black,
               },
             ]}
           />
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: COLORS.white,
     overflow: 'hidden',
+    gap: THEME.SIZES.subHorizontal,
+    paddingVertical: THEME.SIZES.subHorizontal,
     shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
@@ -76,6 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: THEME.SIZES.subHorizontal,
+    paddingHorizontal: THEME.SIZES.subHorizontal,
   },
   avaterImg: {
     width: 50,
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   description: {
-    padding: THEME.SIZES.subHorizontal,
+    paddingHorizontal: THEME.SIZES.subHorizontal,
     flexDirection: 'row',
     flex: 1,
     gap: THEME.SIZES.subHorizontal,

@@ -1,1 +1,2 @@
-import {useLogin} from './useAuth';
+export {useLogin} from './useAuth';
+export {useSearch} from './useSearch';
