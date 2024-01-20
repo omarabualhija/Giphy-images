@@ -15,6 +15,8 @@ In the future we can improve the app by following these points
 
 Here in this app, I think you don't need it yet because I'm trying to listen to the data in each file I want
 
+im using HOC to manage the data in some screens cuz we Do not need it to be share in all screens like search screen so it help us to improve the app
+
 but when the becoume huge u can use it
 like =>memo //usememo//usecallback
 
